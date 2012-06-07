@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require File.join(File.dirname(__FILE__), '../lib/study_buddy')
+require 'optparse'
+
+banner = <<BANNER
+StudyBuddy is a small utility to help you make and take matching tests.
+
+Basic Command Line Usage:
+  study_buddy [command] [-options] [data]
+BANNER
+
+options = {:start_test => false}
+opts = OptionParser.new do |opts|
+  opts.on("-n [NUMBER]", "--number [NUMBER]", "The number of items to create on the test.") do |number|
+    options[:number] = number.to_i
+  end
+
+  opts.on("-s", "--start", "Automatically start the test (Default: Off)") do 
+    options[:start_test] = true
+  end
+  
+  opts.on("-v", "--version", "Display current version") do
+    puts "StudyBuddy " + StudyBuddy::VERSION
+    exit 0
+  end
+end
+opts.parse!
+
+command = ARGV[0] 
+data_file = ARGV[-1] 
+
+StudyBuddy.new(command, data_file, options).process
