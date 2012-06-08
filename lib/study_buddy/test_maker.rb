@@ -8,14 +8,21 @@ class StudyBuddy
       @answers = []
       @number = options[:number].to_i
       @range = options[:range]
-      read_data_file
-      get_topic_name
+      make_test
+      start_if_requested
+    end
+
+    private 
+
+    def make_test
       make_test_dir
-      get_questions
+      read_data_file
+      read_lines
+      get_topic_name
+      get_questions_and_answers
       write_test_file
       write_answer_file
       write_key_file
-      start_if_requested
     end
 
     def read_data_file
@@ -35,23 +42,30 @@ class StudyBuddy
       Dir.mkdir(dir) unless File.exists?(dir)
     end
 
-    def get_questions
+    def read_lines
       lines = IO.readlines(@data_file)
 
       if @range != nil
         start = @range.split("-")[0].to_i
         stop = @range.split("-")[1].to_i
         lines = lines[start-1..stop-1]
-        @lines = lines.shuffle # Make the questions random
-      elsif @number == 0 
-        lines = lines.shuffle # Make the questions random
+        @lines = lines.shuffle
+        return @lines
+      end
+
+      if @number == 0 
+        lines = lines.shuffle
         @number = lines.length
         @lines = lines[0...@number]
       else
-        lines = lines.shuffle # Make the questions random
+        lines = lines.shuffle
         @lines = lines[0...@number]
       end
 
+      return @lines 
+    end
+
+    def get_questions_and_answers
       @lines.each do |line|
         question = line.split("=")[0]
         answer = line.split("=")[1]
