@@ -38,16 +38,18 @@ class StudyBuddy
     #TODO: Refactor
     def get_questions
       lines = IO.readlines(@data_file)
-      lines = lines.shuffle # Make the questions random
 
       if @range != nil
         start = @range.split("-")[0].to_i
         stop = @range.split("-")[1].to_i
-        @lines = lines[start-1..stop-1]
+        lines = lines[start-1..stop-1]
+        @lines = lines.shuffle # Make the questions random
       elsif @number == 0 
+        lines = lines.shuffle # Make the questions random
         @number = lines.length
         @lines = lines[0...@number]
       else
+        lines = lines.shuffle # Make the questions random
         @lines = lines[0...@number]
       end
 
