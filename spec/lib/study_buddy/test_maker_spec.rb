@@ -1,15 +1,7 @@
 require_relative '../../../lib/study_buddy/test_maker'
 
-# StudyBuddy::TestMaker.new(@options).make_test
-# Make a new test with the given data file
-# This is where all the options are used like number and range
-# StudyBuddy::TestMaker.new(data, options).make
-# TODO: Handle it when there is not .test dir
-# TODO: Handle it when there is no data file or bad data file
-# TODO: Have an option here to automatically call the "take" command
-
 describe StudyBuddy::TestMaker do
-  let(:dummy_file){dummy_file = File.expand_path("spec/dummy/test.txt")}
+  let(:dummy_file){dummy_file = File.expand_path("spec/fixtures/test.txt")}
 
   before(:each) do
     Dir.mkdir(File.join(Dir.pwd, ".study_buddy")) unless File.exists?(File.join(Dir.pwd, ".study_buddy"))
