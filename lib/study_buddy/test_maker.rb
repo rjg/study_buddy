@@ -55,8 +55,7 @@ class StudyBuddy
 
       if @number == 0 
         lines = lines.shuffle
-        @number = lines.length
-        @lines = lines[0...@number]
+        @lines = lines[0...10]
       else
         lines = lines.shuffle
         @lines = lines[0...@number]

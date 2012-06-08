@@ -4,6 +4,7 @@ describe StudyBuddy::TestMaker do
   let(:dummy_file){ File.expand_path("spec/fixtures/test.txt") }
   let(:opts) { {:data_file => dummy_file} }
   let(:study_buddy_dir) { File.join(Dir.pwd, ".study_buddy") }
+  let(:study_buddy_test_topic) { File.join(Dir.pwd, ".study_buddy", "test", "test") }
 
   before(:each) do
     Dir.mkdir(study_buddy_dir) unless File.exists?(study_buddy_dir)
@@ -38,6 +39,17 @@ describe StudyBuddy::TestMaker do
     test.questions.length.should == 3
   end
 
+  it "defaults to 10 questions when no number is indicated in the options" do
+    test = StudyBuddy::TestMaker.new(opts)
+    test.questions.length.should == 10
+  end
+
+  it "responds correctly when n > # of questions" do
+    opts[:number] = 1000
+    test = StudyBuddy::TestMaker.new(opts)
+    test.questions.length.should == 25 # Grabs all possible Q's (Fails gracefully)
+  end
+
   context "writing the test files" do
     before(:each) do
       StudyBuddy::TestMaker.new(opts)
@@ -56,7 +68,13 @@ describe StudyBuddy::TestMaker do
     end
   end
   
-  # Pending Specs
-  it "calls 'start' if the option is specified" 
-  it "defaults to 10 questions when no number is indicated in the options"
+  it "calls 'start' if the option is specified" do
+    Kernel.stub(:exec) 
+    opts[:start_test] = true
+    Kernel.should_receive(:exec)
+      .with("vim -o #{study_buddy_test_topic}_ANSWER #{study_buddy_test_topic}_TEST")
+
+    StudyBuddy::TestMaker.new(opts)
+  end
+
 end
