@@ -4,8 +4,8 @@ require File.expand_path('../lib/study_buddy/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Ryan Golden"]
   gem.email         = ["ryan.john.golden@gmail.com"]
-  gem.description   = %q{Description ADD MORE LATER}
-  gem.summary       = %q{Add more later}
+  gem.description   = %q{This gem allows you to easily make and take matching tests.}
+  gem.summary       = %q{See the description.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
