@@ -26,11 +26,7 @@ describe StudyBuddy::TestMaker do
     StudyBuddy::TestMaker.new(opts).lines.kind_of?(Array) == true
   end
 
-  it "defaults to 5 questions when no number is indicated in the options" do 
-    opts = {:data_file => dummy_file}
-    StudyBuddy::TestMaker.new(opts).questions.length.should == 5
-    StudyBuddy::TestMaker.new(opts).answers.length.should == 5
-  end
+  it "defaults to 10 questions when no number is indicated in the options"
 
   it "reads the number from the options hash" do
     opts = {:number => 1, :data_file => dummy_file}

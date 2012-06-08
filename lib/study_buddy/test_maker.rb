@@ -35,7 +35,6 @@ class StudyBuddy
       Dir.mkdir(dir) unless File.exists?(dir)
     end
 
-    #TODO: Refactor
     def get_questions
       lines = IO.readlines(@data_file)
 
