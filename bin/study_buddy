@@ -19,6 +19,10 @@ opts = OptionParser.new do |opts|
   opts.on("-s", "--start", "Automatically start the test (Default: Off)") do 
     options[:start_test] = true
   end
+
+  opts.on("-r", "--range", "Set the range of questions to include in the test") do |r|
+    options[:range] = r
+  end
   
   opts.on("-v", "--version", "Display current version") do
     puts "StudyBuddy " + StudyBuddy::VERSION

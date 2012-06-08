@@ -7,6 +7,7 @@ class StudyBuddy
       @questions = []
       @answers = []
       @number = options[:number].to_i
+      @range = options[:range]
       read_data_file
       get_topic_name
       make_test_dir
@@ -34,11 +35,21 @@ class StudyBuddy
       Dir.mkdir(dir) unless File.exists?(dir)
     end
 
+    #TODO: Refactor
     def get_questions
       lines = IO.readlines(@data_file)
       lines = lines.shuffle # Make the questions random
-      @number = lines.length if @number == 0
-      @lines = lines[0...@number]
+
+      if @range != nil
+        start = @range.split("-")[0].to_i
+        stop = @range.split("-")[1].to_i
+        @lines = lines[start-1..stop-1]
+      elsif @number == 0 
+        @number = lines.length
+        @lines = lines[0...@number]
+      else
+        @lines = lines[0...@number]
+      end
 
       @lines.each do |line|
         question = line.split("=")[0]

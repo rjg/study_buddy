@@ -31,18 +31,23 @@ describe StudyBuddy::TestMaker do
 
   it "reads the lines of the file" do
     opts = {:data_file => dummy_file}
-    StudyBuddy::TestMaker.new(opts).lines.length.should == 2
+    StudyBuddy::TestMaker.new(opts).lines.kind_of?(Array) == true
   end
 
-  it "creates an array of questions and answers" do 
+  it "defaults to 5 questions when no number is indicated in the options" do 
     opts = {:data_file => dummy_file}
-    StudyBuddy::TestMaker.new(opts).questions.length.should == 2
-    StudyBuddy::TestMaker.new(opts).answers.length.should == 2
+    StudyBuddy::TestMaker.new(opts).questions.length.should == 5
+    StudyBuddy::TestMaker.new(opts).answers.length.should == 5
   end
 
   it "reads the number from the options hash" do
     opts = {:number => 1, :data_file => dummy_file}
     StudyBuddy::TestMaker.new(opts).questions.length.should == 1
+  end
+
+  it "reads the range from the options hash" do
+    opts = {:range => "2-4", :data_file => dummy_file}
+    StudyBuddy::TestMaker.new(opts).questions.length.should == 3
   end
 
   # I don't know how to implement this.
