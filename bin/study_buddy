@@ -20,7 +20,7 @@ opts = OptionParser.new do |opts|
     options[:start_test] = true
   end
 
-  opts.on("-r", "--range", "Set the range of questions to include in the test") do |r|
+  opts.on("-r [NUMBER]", "--range [NUMBER]", "Set the range of questions to include in the test") do |r|
     options[:range] = r
   end
   
