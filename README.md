@@ -30,7 +30,8 @@ More to come on this later...
 
 ## TODO:
 
-1. Have it remember what the last settings were so when I want to just make a new test, I can just do "study_buddy make"
-2. Handle the question number thing (e.g. when I try to do a test with more questions than lines)
-3. The checking is broken.  It needs to remember what you were doing last so when you run study_buddy check it knows what test to check.
-4. The lib/study_buddy initialize method needs to be cleaned up.
+1. Make it so you can have a range AND a number.  So if I want to do only 10 from a certain directory or range of 20.  
+2. Have it remember what the last settings were so when I want to just make a new test, I can just do "study_buddy make"
+3. Handle the question number thing (e.g. when I try to do a test with more questions than lines)
+4. The checking is broken.  It needs to remember what you were doing last so when you run study_buddy check it knows what test to check.
+5. The lib/study_buddy initialize method needs to be cleaned up.
