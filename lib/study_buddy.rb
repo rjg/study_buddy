@@ -7,9 +7,11 @@ class StudyBuddy
     @options = options
     @options[:data_file] = data_file
     @command = command
-    test_dir = File.join(Dir.pwd, ".study_buddy", "test")
-    file_name = Dir.glob("#{test_dir}/**")[0].match(/(\w*)_ANSWER/)[0].gsub("_ANSWER", "")
-    @full_path = File.join(test_dir, file_name)
+    unless @command == "make"
+      test_dir = File.join(Dir.pwd, ".study_buddy", "test")
+      file_name = Dir.glob("#{test_dir}/**")[0].match(/(\w*)_ANSWER/)[0].gsub("_ANSWER", "")
+      @full_path = File.join(test_dir, file_name)
+    end
   end
   
   def process
