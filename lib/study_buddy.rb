@@ -7,11 +7,7 @@ class StudyBuddy
     @options = options
     @options[:data_file] = data_file
     @command = command
-    unless @command == "make"
-      test_dir = File.join(Dir.pwd, ".study_buddy", "test")
-      file_name = Dir.glob("#{test_dir}/**")[0].match(/(\w*)_ANSWER/)[0].gsub("_ANSWER", "")
-      @full_path = File.join(test_dir, file_name)
-    end
+    @test_dir = File.join(Dir.pwd, ".study_buddy", "test")
   end
   
   def process
@@ -21,9 +17,9 @@ class StudyBuddy
     when "make"
       StudyBuddy::TestMaker.new(@options)
     when "take"
-      Kernel.exec("vim -o #{@full_path}_ANSWER #{@full_path}_TEST")
+      Kernel.exec("vim -o #{@test_dir}/ANSWER #{@test_dir}/TEST")
     when "check"
-      Kernel.exec("colordiff #{@full_path}_TEST #{@full_path}_KEY")
+      Kernel.exec("colordiff #{@test_dir}/TEST #{@test_dir}/KEY")
     else
       raise "Please specify a command."
     end

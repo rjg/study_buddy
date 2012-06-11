@@ -18,7 +18,6 @@ class StudyBuddy
       make_test_dir
       read_data_file
       read_lines
-      get_topic_name
       get_questions_and_answers
       write_test_file
       write_answer_file
@@ -31,10 +30,6 @@ class StudyBuddy
       else
         @data_file = @options[:data_file]
       end
-    end
-
-    def get_topic_name
-      @topic = File.basename(@data_file, ".txt")
     end
 
     def make_test_dir
@@ -75,7 +70,7 @@ class StudyBuddy
     end
 
     def write_test_file
-      file_name = File.join(Dir.pwd, ".study_buddy", "test", @topic + "_TEST")
+      file_name = File.join(Dir.pwd, ".study_buddy", "test", "TEST")
       File.open(file_name, "w+") do |file|
         @questions.map do |q|
           q = "#{q}= \n"
@@ -85,14 +80,14 @@ class StudyBuddy
     end
 
     def write_answer_file
-      file_name = File.join(Dir.pwd, ".study_buddy", "test", @topic + "_ANSWER")
+      file_name = File.join(Dir.pwd, ".study_buddy", "test", "ANSWER")
       File.open(file_name, "w+") do |file|
         @answers.shuffle.each{|a| file << "#{a.strip}\n"}
       end
     end
 
     def write_key_file
-      file_name = File.join(Dir.pwd, ".study_buddy", "test", @topic + "_KEY")
+      file_name = File.join(Dir.pwd, ".study_buddy", "test", "KEY")
       File.open(file_name, "w+") do |file|
         n = @questions.length
         (0...n).each do |i|
@@ -103,8 +98,8 @@ class StudyBuddy
 
     def start_if_requested
       if @options[:start_test] == true
-        file = File.join(Dir.pwd, ".study_buddy", "test", @topic)
-        Kernel.exec("vim -o #{file}_ANSWER #{file}_TEST")
+        file = File.join(Dir.pwd, ".study_buddy", "test")
+        Kernel.exec("vim -o #{file}/ANSWER #{file}/TEST")
       end
     end
   end

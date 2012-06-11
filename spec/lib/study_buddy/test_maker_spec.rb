@@ -4,7 +4,6 @@ describe StudyBuddy::TestMaker do
   let(:dummy_file){ File.expand_path("spec/fixtures/test.txt") }
   let(:opts) { {:data_file => dummy_file} }
   let(:study_buddy_dir) { File.join(Dir.pwd, ".study_buddy") }
-  let(:study_buddy_test_topic) { File.join(Dir.pwd, ".study_buddy", "test", "test") }
 
   before(:each) do
     Dir.mkdir(study_buddy_dir) unless File.exists?(study_buddy_dir)
@@ -56,15 +55,15 @@ describe StudyBuddy::TestMaker do
     end
 
     it "makes the test" do
-      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "test_TEST")).should == true
+      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "TEST")).should == true
     end
 
     it "makes the answer choices" do
-      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "test_ANSWER")).should == true
+      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "ANSWER")).should == true
     end
 
     it "makes the answer key" do
-      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "test_KEY")).should == true
+      File.exists?(File.join(Dir.pwd, ".study_buddy", "test", "KEY")).should == true
     end
   end
   
@@ -72,7 +71,7 @@ describe StudyBuddy::TestMaker do
     Kernel.stub(:exec) 
     opts[:start_test] = true
     Kernel.should_receive(:exec)
-      .with("vim -o #{study_buddy_test_topic}_ANSWER #{study_buddy_test_topic}_TEST")
+      .with("vim -o #{study_buddy_dir}/test/ANSWER #{study_buddy_dir}/test/TEST")
 
     StudyBuddy::TestMaker.new(opts)
   end
