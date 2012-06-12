@@ -39,6 +39,7 @@ class StudyBuddy
 
     def read_lines
       lines = IO.readlines(@data_file)
+      lines.reject!{|item| item == "\n"} # Handle blank lines in file
 
       if @range != nil
         start = @range.split("-")[0].to_i

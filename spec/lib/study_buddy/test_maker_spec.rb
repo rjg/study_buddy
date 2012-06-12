@@ -22,8 +22,9 @@ describe StudyBuddy::TestMaker do
     File.exists?(File.join(study_buddy_dir, "test")).should == true
   end
 
-  it "reads the lines of the file" do
-    StudyBuddy::TestMaker.new(opts).lines.kind_of?(Array) == true
+  it "reads only the populated lines of the file" do
+    opts[:number] = 1000
+    StudyBuddy::TestMaker.new(opts).lines.length.should == 25
   end
 
   it "reads the number from the options hash" do
