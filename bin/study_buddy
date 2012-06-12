@@ -10,10 +10,14 @@ Basic Command Line Usage:
   study_buddy [command] [-options] [data]
 BANNER
 
-options = {:start_test => false}
+options = {:start_test => false, :weak => false}
 opts = OptionParser.new do |opts|
   opts.on("-n [NUMBER]", "--number [NUMBER]", "The number of items to create on the test.") do |number|
     options[:number] = number.to_i
+  end
+
+  opts.on("-w", "--weak", "Make a test from the WEAK file") do 
+    options[:weak] = true
   end
 
   opts.on("-s", "--start", "Automatically start the test (Default: Off)") do 

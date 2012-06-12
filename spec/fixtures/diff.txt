@@ -1,0 +1,8 @@
+4c4
+< phosphorylation glycosylation and hydroxylation                                 = proteasomal degradation
+---
+> phosphorylation glycosylation and hydroxylation                                 = covalent modifications
+15c15
+< attachment of ubiquitin to defective proteins to tag for destruction            = covalent modifications
+---
+> attachment of ubiquitin to defective proteins to tag for destruction            = proteasomal degradation
