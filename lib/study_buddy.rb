@@ -28,7 +28,11 @@ class StudyBuddy
     when "reset_weak"
       File.open('.study_buddy/test/WEAK', 'w')
     else
-      raise "Please specify a command."
+      puts %Q(
+************************
+Please specify a command.
+************************
+)
     end
   end
 end
